@@ -1,0 +1,1 @@
+# pos-java-maven-hibernate
