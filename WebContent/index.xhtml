@@ -5,8 +5,21 @@
 <h:head></h:head>
 <h:body>
 	<h:form>
-		<h:outputLabel>Olá JSF</h:outputLabel>
-		<h:inputText></h:inputText>
+		<h:panelGrid>
+			<h:outputLabel>Id</h:outputLabel>
+			<h:inputText readonly="true"
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.id}" />
+			<h:outputLabel>Nome</h:outputLabel>
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.nome}" />
+			<h:outputLabel>E-mail</h:outputLabel>
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.email}" />
+			<h:outputLabel>Idade Momento</h:outputLabel>
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.idade}" />
+			<h:outputLabel>Login</h:outputLabel>
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.login}" />
+			<h:outputLabel>Senha</h:outputLabel>
+			<h:inputSecret value="#{usuarioPessoaManagedBean.usuarioPessoa.senha}" />
+		</h:panelGrid>
 	</h:form>
 </h:body>
 </html>
