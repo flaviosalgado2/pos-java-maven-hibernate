@@ -1,14 +1,13 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>pos-java-maven-hibernate</groupId>
-	<artifactId>posjavamavenhibernate</artifactId>
+	<artifactId>pos-java-maven-hibernate</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>posjavamavenhibernate</name>
+	<name>pos-java-maven-hibernate</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -31,18 +30,20 @@
 		</dependency>
 
 
-		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+		<!-- HIBERNATE -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>5.2.6.Final</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
+
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>5.2.6.Final</version>
 		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/com.sun.faces/jsf-api -->
 		<dependency>
 			<groupId>com.sun.faces</groupId>
@@ -59,12 +60,10 @@
 			<scope>compile</scope>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-annotations -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-annotations</artifactId>
-			<version>3.5.0-Final</version>
-			<scope>compile</scope>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>6.2</version>
 		</dependency>
 
 	</dependencies>

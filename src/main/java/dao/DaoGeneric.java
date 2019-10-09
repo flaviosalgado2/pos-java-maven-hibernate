@@ -7,7 +7,8 @@ import javax.persistence.EntityTransaction;
 
 import posjavamavenhibernate.HibernateUtil;
 
-public class DaoGeneric<E> {
+@SuppressWarnings("unchecked")
+public class DaoGeneric<E> {	
 	
 	private EntityManager entityManager = HibernateUtil.geEntityManager();
 	
