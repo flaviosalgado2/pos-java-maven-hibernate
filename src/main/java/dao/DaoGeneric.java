@@ -10,7 +10,7 @@ import posjavamavenhibernate.HibernateUtil;
 @SuppressWarnings("unchecked")
 public class DaoGeneric<E> {	
 	
-	private EntityManager entityManager = HibernateUtil.geEntityManager();
+	private EntityManager entityManager = HibernateUtil.getEntityManager();
 	
 	public void salvar(E entidade) {
 		
