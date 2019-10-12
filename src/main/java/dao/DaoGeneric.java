@@ -48,7 +48,7 @@ public class DaoGeneric<E> {
 		
 	}
 	
-	public void deletarPoId(E entidade) {
+	public void deletarPorId(E entidade) {
 		
 		Object id = HibernateUtil.getPrimaryKey(entidade);
 		

@@ -70,7 +70,7 @@ public class TesteHibernate {
 
 		UsuarioPessoa pessoa = daoGeneric.pesquisar(10L, UsuarioPessoa.class);
 
-		daoGeneric.deletarPoId(pessoa);
+		daoGeneric.deletarPorId(pessoa);
 
 	}
 

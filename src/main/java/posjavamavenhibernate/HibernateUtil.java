@@ -14,12 +14,13 @@ public class HibernateUtil {
 	private static void init() {
 		try {
 			if(factory == null) {
-				factory = Persistence.createEntityManagerFactory("pos-java-maven-hibernate");
+				factory = Persistence.createEntityManagerFactory("pos-java-maven");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
 	public static EntityManager getEntityManager() {
 		
 		return factory.createEntityManager();//provem a parte de persistencia

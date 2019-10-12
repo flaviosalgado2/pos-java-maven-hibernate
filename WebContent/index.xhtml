@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head></h:head>
 <h:body>
 	<h:form>
-		<h:panelGrid>
+	<h:messages showSummary="false" showDetail="true"/>
+		<h:panelGrid columns="2">
 			<h:outputLabel>Id</h:outputLabel>
 			<h:inputText readonly="true"
 				value="#{usuarioPessoaManagedBean.usuarioPessoa.id}" />
@@ -18,10 +20,56 @@
 			<h:outputLabel>Login</h:outputLabel>
 			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.login}" />
 			<h:outputLabel>Senha</h:outputLabel>
-			<h:inputSecret value="#{usuarioPessoaManagedBean.usuarioPessoa.senha}" />
+			<h:inputSecret
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.senha}" />
 		</h:panelGrid>
-		<h:commandButton value="Salvar" action="#{usuarioPessoaManagedBean.salvar}"/>
-		<h:commandButton value="Novo" action="#{usuarioPessoaManagedBean.novo}"/>
+		<h:commandButton value="Salvar"
+			action="#{usuarioPessoaManagedBean.salvar}" />
+		<h:commandButton value="Novo"
+			action="#{usuarioPessoaManagedBean.novo}" />
+
+		<h:dataTable value="#{usuarioPessoaManagedBean.list}" var="user"
+			cellpadding="15" border="1">
+			<f:facet name="header">Lista de Usuários</f:facet>
+			<h:column>
+				<f:facet name="header">Id</f:facet>
+				<h:outputText value="#{user.id}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				<h:outputText value="#{user.nome}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Idade</f:facet>
+				<h:outputText value="#{user.idade}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">E-mail</f:facet>
+				<h:outputText value="#{user.email}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Editar</f:facet>
+				<h:commandLink value="Editar">
+
+					<f:setPropertyActionListener value="#{user}"
+						target="#{usuarioPessoaManagedBean.usuarioPessoa}" />
+
+				</h:commandLink>
+
+			</h:column>
+			<h:column>
+				<f:facet name="header">Delete</f:facet>
+				<h:commandLink value="Deletar" action="#{usuarioPessoaManagedBean.remover}">
+
+					<f:setPropertyActionListener value="#{user}"
+						target="#{usuarioPessoaManagedBean.usuarioPessoa}" />
+
+				</h:commandLink>
+
+			</h:column>
+
+		</h:dataTable>
+
 	</h:form>
 </h:body>
 </html>
