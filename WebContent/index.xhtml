@@ -5,8 +5,9 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head></h:head>
 <h:body>
+
 	<h:form>
-	<h:messages showSummary="false" showDetail="true"/>
+		<h:messages showSummary="false" showDetail="true" />
 		<h:panelGrid columns="2">
 			<h:outputLabel>Id</h:outputLabel>
 			<h:inputText readonly="true"
@@ -59,7 +60,8 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">Delete</f:facet>
-				<h:commandLink value="Deletar" action="#{usuarioPessoaManagedBean.remover}">
+				<h:commandLink value="Deletar"
+					action="#{usuarioPessoaManagedBean.remover}">
 
 					<f:setPropertyActionListener value="#{user}"
 						target="#{usuarioPessoaManagedBean.usuarioPessoa}" />
