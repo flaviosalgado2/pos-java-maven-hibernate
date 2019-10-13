@@ -55,7 +55,7 @@ public class UsuarioPessoaManagedBean implements Serializable {
 		daoGeneric.deletarPorId(usuarioPessoa);
 		usuarioPessoa = new UsuarioPessoa();
 		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação: ", "Salvo com Sucesso!"));
+				new FacesMessage(FacesMessage.SEVERITY_WARN, "Informação: ", "Excluído com Sucesso!"));
 		return "";
 	}
 

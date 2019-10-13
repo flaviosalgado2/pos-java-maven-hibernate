@@ -1,5 +1,6 @@
 package dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,7 +9,9 @@ import javax.persistence.EntityTransaction;
 import posjavamavenhibernate.HibernateUtil;
 
 @SuppressWarnings("unchecked")
-public class DaoGeneric<E> {	
+public class DaoGeneric<E> implements Serializable{	
+	
+	private static final long serialVersionUID = -7335291601534204399L;
 	
 	private EntityManager entityManager = HibernateUtil.getEntityManager();
 	

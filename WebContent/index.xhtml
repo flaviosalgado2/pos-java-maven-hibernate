@@ -2,10 +2,20 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 <h:head></h:head>
 <h:body>
 
+	<h1>Cadastro de Usuário</h1>
+
+	<h:form>
+		<p:breadCrumb>
+			<p:menuitem />
+			<p:menuitem value="Página JSF" action="index.jsf" />
+			<p:menuitem value="Página Prime Faces" action="primefaces.jsf" />
+		</p:breadCrumb>
+	</h:form>
 	<h:form>
 		<h:messages showSummary="false" showDetail="true" />
 		<h:panelGrid columns="2">
