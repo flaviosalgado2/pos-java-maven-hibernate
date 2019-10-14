@@ -51,7 +51,7 @@ public class DaoGeneric<E> implements Serializable{
 		
 	}
 	
-	public void deletarPorId(E entidade) {
+	public void deletarPorId (E entidade) throws Exception{
 		
 		Object id = HibernateUtil.getPrimaryKey(entidade);
 		

@@ -16,8 +16,8 @@
 			<p:menuitem value="Página Prime Faces" action="primefaces.jsf" />
 		</p:breadCrumb>
 	</h:form>
-	<h:form>
-		<h:messages showSummary="false" showDetail="true" />
+	<h:form id="formulario">
+		<h:messages showSummary="false" showDetail="true" id="msg" />
 		<h:panelGrid columns="2">
 			<h:outputLabel>Id</h:outputLabel>
 			<h:inputText readonly="true"
@@ -28,6 +28,14 @@
 			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.email}" />
 			<h:outputLabel>Idade Momento</h:outputLabel>
 			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.idade}" />
+
+			<h:outputLabel>Sexo</h:outputLabel>
+			<h:selectOneMenu
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.sexo}">
+				<f:selectItem itemValue="MASCULINO" />
+				<f:selectItem itemValue="FEMININO" />
+			</h:selectOneMenu>
+
 			<h:outputLabel>Login</h:outputLabel>
 			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.login}" />
 			<h:outputLabel>Senha</h:outputLabel>
@@ -38,7 +46,9 @@
 			action="#{usuarioPessoaManagedBean.salvar}" />
 		<h:commandButton value="Novo"
 			action="#{usuarioPessoaManagedBean.novo}" />
+	</h:form>
 
+	<h:form id="formTable">
 		<h:dataTable value="#{usuarioPessoaManagedBean.list}" var="user"
 			cellpadding="15" border="1">
 			<f:facet name="header">Lista de Usuários</f:facet>
@@ -60,21 +70,20 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">Editar</f:facet>
-				<h:commandLink value="Editar">
-
+				<h:commandLink value="Editar" id="botaoeditar">
 					<f:setPropertyActionListener value="#{user}"
 						target="#{usuarioPessoaManagedBean.usuarioPessoa}" />
-
 				</h:commandLink>
 
 			</h:column>
 			<h:column>
 				<f:facet name="header">Delete</f:facet>
 				<h:commandLink value="Deletar"
-					action="#{usuarioPessoaManagedBean.remover}">
+					action="#{usuarioPessoaManagedBean.remover}" id="botaoexcluir">
 
 					<f:setPropertyActionListener value="#{user}"
 						target="#{usuarioPessoaManagedBean.usuarioPessoa}" />
+					<f:ajax execute="botaoexcluir" render="@form :formulario:msg" />
 
 				</h:commandLink>
 
