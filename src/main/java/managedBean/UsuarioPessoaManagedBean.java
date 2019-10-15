@@ -10,7 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import dao.DaoGeneric;
+import dao.DaoUsuario;
 import model.UsuarioPessoa;
 
 @ManagedBean(name = "usuarioPessoaManagedBean")
@@ -20,9 +20,9 @@ public class UsuarioPessoaManagedBean implements Serializable {
 	private static final long serialVersionUID = 9084995168573531022L;
 
 	private UsuarioPessoa usuarioPessoa = new UsuarioPessoa();
-	private DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
 	private List<UsuarioPessoa> list = new ArrayList<UsuarioPessoa>();
-	
+	private DaoUsuario<UsuarioPessoa> daoGeneric = new DaoUsuario<UsuarioPessoa>();
+
 	@PostConstruct
 	public void init() {
 		list = daoGeneric.listar(UsuarioPessoa.class);
@@ -53,16 +53,14 @@ public class UsuarioPessoaManagedBean implements Serializable {
 
 	public List<UsuarioPessoa> getList() {
 
-		
-
 		return list;
 	}
 
 	public String remover() {
 
-			try {
+		try {
 
-			daoGeneric.deletarPorId(usuarioPessoa);
+			daoGeneric.removerUsuario(usuarioPessoa);
 			list.remove(usuarioPessoa);
 			usuarioPessoa = new UsuarioPessoa();
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -71,8 +69,8 @@ public class UsuarioPessoaManagedBean implements Serializable {
 		} catch (Exception e) {
 
 			if (e.getCause() instanceof org.hibernate.exception.ConstraintViolationException) {
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_WARN, "Informação: ", "Existem telefones para o usuário!"));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
+						"Informação: ", "Existem telefones para o usuário!"));
 			}
 		}
 		return "";
