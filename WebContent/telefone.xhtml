@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+<h:body>
+
+	<h1>Cadastro de Telefones</h1>
+
+	<h:form>
+		<p:breadCrumb>
+			<p:menuitem />
+			<p:menuitem value="Página JSF" action="index.jsf" />
+			<p:menuitem value="Página Prime Faces" action="primefaces.jsf" />
+		</p:breadCrumb>
+	</h:form>
+
+	<h:form id="formulario">
+		<h:messages showDetail="true" showSummary="false" id="msg" />
+		<h:panelGrid columns="2">
+			<h:outputLabel>Usuário</h:outputLabel>
+			<h:inputText value="#{telefoneManagedBean.user.nome}" readonly="true" />
+
+			<h:outputLabel>Número</h:outputLabel>
+			<h:inputText value="#{telefoneManagedBean.telefone.numero}" />
+
+			<h:outputLabel>Tipo</h:outputLabel>
+			<h:inputText value="#{telefoneManagedBean.telefone.tipo}" />
+		</h:panelGrid>
+
+		<br />
+		<br />
+
+		<h:commandButton value="Salvar" action="#{telefoneManagedBean.salvar}"></h:commandButton>
+	</h:form>
+
+	<h:form id="formTelefones">
+		<h:dataTable value="#{telefoneManagedBean.user.telefoneUser}"
+			var="fone" cellpadding="15" border="1">
+			<f:facet name="header">Lista de Telefones</f:facet>
+
+			<h:column style="width: 150px;">
+				<f:facet name="header">Id</f:facet>
+				<h:outputText value="#{fone.id}" />
+			</h:column>
+
+			<h:column style="width: 150px;">
+				<f:facet name="header">Número</f:facet>
+				<h:outputText value="#{fone.numero}" />
+			</h:column>
+			
+						<h:column style="width: 150px;">
+				<f:facet name="header">Tipo</f:facet>
+				<h:outputText value="#{fone.tipo}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Delete</f:facet>
+				<h:commandLink value="Deletar"
+					action="#{telefoneManagedBean.removeTelefone}" id="botaoexcluir">
+
+					<f:setPropertyActionListener value="#{fone}"
+						target="#{telefoneManagedBean.telefone}" />
+					<f:ajax execute="botaoexcluir" render="@form :formulario:msg" />
+
+				</h:commandLink>
+
+			</h:column>
+		</h:dataTable>
+	</h:form>
+</h:body>
+</html>
