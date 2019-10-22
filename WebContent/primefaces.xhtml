@@ -28,11 +28,19 @@
 				value="#{usuarioPessoaManagedBean.usuarioPessoa.id}" />
 			<p:outputLabel>Nome</p:outputLabel>
 			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.nome}"
-				required="true" requiredMessage="Informe o Nome!" a:autofocus="true"/>
+				required="true" requiredMessage="Informe o Nome!" a:autofocus="true" />
 			<p:outputLabel>E-mail</p:outputLabel>
 			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.email}" />
 			<p:outputLabel>Idade Momento</p:outputLabel>
 			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.idade}" />
+
+			<p:outputLabel>Sexo</p:outputLabel>
+			<p:selectOneMenu
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.sexo}">
+				<f:selectItem itemValue="MASCULINO" itemLabel="Masculino" />
+				<f:selectItem itemValue="FEMININO" itemLabel="Feminino" />
+			</p:selectOneMenu>
+
 			<p:outputLabel>Login</p:outputLabel>
 			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.login}" />
 			<p:outputLabel>Senha</p:outputLabel>
@@ -41,13 +49,17 @@
 
 		<br />
 		<p:commandButton id="novo" value="Novo"
-			action="#{usuarioPessoaManagedBean.novo}" ajax="false" />
+			action="#{usuarioPessoaManagedBean.novo}" immediate="true">
+			<f:ajax execute="@this" render="@form" />
+		</p:commandButton>
+
 		<p:commandButton id="salvar" value="Salvar"
-			action="#{usuarioPessoaManagedBean.salvar}" ajax="false" />
+			action="#{usuarioPessoaManagedBean.salvar}" ajax="false"/>
+
 	</h:form>
 	<br />
 	<br />
-	<h:form id="datatable">
+	<h:form id="formtable">
 		<p:dataTable var="user" value="#{usuarioPessoaManagedBean.list}">
 			<p:column headerText="Id">
 				<h:outputText value="#{user.id}" />
@@ -66,9 +78,11 @@
 			</p:column>
 			<p:column>
 				<f:facet name="header">Editar</f:facet>
-				<h:commandLink value="Editar" id="botaoeditar">
+				<h:commandLink value="Editar" id="botaoeditar" immediate="true">
 					<f:setPropertyActionListener value="#{user}"
 						target="#{usuarioPessoaManagedBean.usuarioPessoa}" />
+					<f:ajax execute="botaoeditar" render="@form :formulario" />
+					<h:graphicImage />
 				</h:commandLink>
 
 			</p:column>
@@ -79,6 +93,13 @@
 					<f:setPropertyActionListener value="#{user}"
 						target="#{usuarioPessoaManagedBean.usuarioPessoa}" />
 					<f:ajax execute="botaoexcluir" render="@form :formulario:msg" />
+				</h:commandLink>
+
+			</p:column>
+
+			<p:column headerText="Telefones">
+				<h:commandLink immediate="true" action="telefoneprimefaces.jsf"
+					id="botaofone">
 				</h:commandLink>
 
 			</p:column>

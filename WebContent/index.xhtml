@@ -36,6 +36,20 @@
 				<f:selectItem itemValue="FEMININO" />
 			</h:selectOneMenu>
 
+			<h:outputLabel>Cep</h:outputLabel>
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.cep}" id="cepuser">
+				<f:ajax event="blur" execute="@this"
+					listener="#{usuarioPessoaManagedBean.pesquisaCep}" render="logradouro bairro uf"/>
+			</h:inputText>
+			
+			<h:outputLabel>Logradouro</h:outputLabel>
+			<h:inputText
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.logradouro}" id="logradouro"/>
+			<h:outputLabel>Bairro</h:outputLabel>
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.bairro}" id="bairro"/>
+			<h:outputLabel>Uf</h:outputLabel>
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.uf}" id="uf"/>
+
 			<h:outputLabel>Login</h:outputLabel>
 			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.login}" />
 			<h:outputLabel>Senha</h:outputLabel>
@@ -84,6 +98,17 @@
 					<f:setPropertyActionListener value="#{user}"
 						target="#{usuarioPessoaManagedBean.usuarioPessoa}" />
 					<f:ajax execute="botaoexcluir" render="@form :formulario:msg" />
+
+				</h:commandLink>
+
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Telefones</f:facet>
+				<h:commandLink immediate="true" value="Ver Telefone"
+					action="telefone.jsf" id="botaofone">
+
+					<f:param name="codigouser" value="#{user.id}" />
 
 				</h:commandLink>
 

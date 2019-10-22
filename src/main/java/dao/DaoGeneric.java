@@ -34,8 +34,8 @@ public class DaoGeneric<E> implements Serializable{
 	}
 	
 	public E pesquisar(Long id, Class<E> entidade) {
-		
-		E e = (E) entityManager.find(entidade, id);
+		entityManager.clear();
+		E e = (E) entityManager.createQuery("from " + entidade.getSimpleName() + " where id = " + id).getSingleResult();
 		
 		return e;
 	}
