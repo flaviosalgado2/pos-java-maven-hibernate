@@ -20,43 +20,46 @@
 	<h:form id="formulario">
 		<h:messages showDetail="true" showSummary="false" id="msg" />
 		<h:panelGrid columns="2">
-			<h:outputLabel>Usuário</h:outputLabel>
-			<h:inputText value="#{telefoneManagedBean.user.nome}" readonly="true" />
+			<p:outputLabel>Usuário:</p:outputLabel>
+			<p:outputLabel value="#{telefoneManagedBean.user.nome}"
+				readonly="true" />
 
-			<h:outputLabel>Número</h:outputLabel>
+			<p:outputLabel>Número:</p:outputLabel>
 			<h:inputText value="#{telefoneManagedBean.telefone.numero}" />
 
-			<h:outputLabel>Tipo</h:outputLabel>
+			<p:outputLabel>Tipo:</p:outputLabel>
 			<h:inputText value="#{telefoneManagedBean.telefone.tipo}" />
 		</h:panelGrid>
 
 		<br />
 		<br />
 
-		<h:commandButton value="Salvar" action="#{telefoneManagedBean.salvar}"></h:commandButton>
+		<p:commandButton value="Salvar" action="#{telefoneManagedBean.salvar}"
+			ajax="false"></p:commandButton>
+
 	</h:form>
 
 	<h:form id="formTelefones">
-		<h:dataTable value="#{telefoneManagedBean.user.telefoneUser}"
-			var="fone" cellpadding="15" border="1">
-			<f:facet name="header">Lista de Telefones</f:facet>
 
-			<h:column style="width: 150px;">
+		<p:dataTable value="#{telefoneManagedBean.user.telefoneUser}"
+			var="fone">
+
+			<p:column>
 				<f:facet name="header">Id</f:facet>
 				<h:outputText value="#{fone.id}" />
-			</h:column>
+			</p:column>
 
-			<h:column style="width: 150px;">
+			<p:column>
 				<f:facet name="header">Número</f:facet>
 				<h:outputText value="#{fone.numero}" />
-			</h:column>
-			
-						<h:column style="width: 150px;">
+			</p:column>
+
+			<p:column>
 				<f:facet name="header">Tipo</f:facet>
 				<h:outputText value="#{fone.tipo}" />
-			</h:column>
+			</p:column>
 
-			<h:column>
+			<p:column>
 				<f:facet name="header">Delete</f:facet>
 				<h:commandLink value="Deletar"
 					action="#{telefoneManagedBean.removeTelefone}" id="botaoexcluir">
@@ -67,8 +70,10 @@
 
 				</h:commandLink>
 
-			</h:column>
-		</h:dataTable>
+			</p:column>
+
+		</p:dataTable>
+
 	</h:form>
 </h:body>
 </html>

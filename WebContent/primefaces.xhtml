@@ -34,6 +34,10 @@
 			<p:outputLabel>Idade Momento</p:outputLabel>
 			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.idade}" />
 
+			<p:outputLabel>Salário</p:outputLabel>
+			<p:inputText
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.salario}" />
+
 			<p:outputLabel>Sexo</p:outputLabel>
 			<p:selectOneMenu
 				value="#{usuarioPessoaManagedBean.usuarioPessoa.sexo}">
@@ -54,7 +58,7 @@
 		</p:commandButton>
 
 		<p:commandButton id="salvar" value="Salvar"
-			action="#{usuarioPessoaManagedBean.salvar}" ajax="false"/>
+			action="#{usuarioPessoaManagedBean.salvar}" ajax="false" />
 
 	</h:form>
 	<br />
@@ -76,6 +80,11 @@
 			<p:column headerText="Idade">
 				<h:outputText value="#{user.idade}" />
 			</p:column>
+
+			<p:column headerText="Salario">
+				<h:outputText value="#{user.salario}" />
+			</p:column>
+
 			<p:column>
 				<f:facet name="header">Editar</f:facet>
 				<h:commandLink value="Editar" id="botaoeditar" immediate="true">
@@ -97,13 +106,18 @@
 
 			</p:column>
 
-			<p:column headerText="Telefones">
-				<h:commandLink immediate="true" action="telefoneprimefaces.jsf"
-					id="botaofone">
+			<p:column>
+				<f:facet name="header">Telefones</f:facet>
+				<h:commandLink immediate="true" value="Ver Telefone"
+					action="telefoneprimefaces.jsf" id="botaofone">
+					<f:param name="codigouser" value="#{user.id}" />
 				</h:commandLink>
-
 			</p:column>
+
 		</p:dataTable>
 	</h:form>
+	
+	<p:chart type="bar" model="#{usuarioPessoaManagedBean.barChartModel}" />
+	
 </h:body>
 </html>

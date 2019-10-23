@@ -29,6 +29,10 @@
 			<h:outputLabel>Idade Momento</h:outputLabel>
 			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.idade}" />
 
+			<h:outputLabel>Salário</h:outputLabel>
+			<h:inputText
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.salario}" />
+
 			<h:outputLabel>Sexo</h:outputLabel>
 			<h:selectOneMenu
 				value="#{usuarioPessoaManagedBean.usuarioPessoa.sexo}">
@@ -37,18 +41,23 @@
 			</h:selectOneMenu>
 
 			<h:outputLabel>Cep</h:outputLabel>
-			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.cep}" id="cepuser">
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.cep}"
+				id="cepuser">
 				<f:ajax event="blur" execute="@this"
-					listener="#{usuarioPessoaManagedBean.pesquisaCep}" render="logradouro bairro uf"/>
+					listener="#{usuarioPessoaManagedBean.pesquisaCep}"
+					render="logradouro bairro uf" />
 			</h:inputText>
-			
+
 			<h:outputLabel>Logradouro</h:outputLabel>
 			<h:inputText
-				value="#{usuarioPessoaManagedBean.usuarioPessoa.logradouro}" id="logradouro"/>
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.logradouro}"
+				id="logradouro" />
 			<h:outputLabel>Bairro</h:outputLabel>
-			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.bairro}" id="bairro"/>
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.bairro}"
+				id="bairro" />
 			<h:outputLabel>Uf</h:outputLabel>
-			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.uf}" id="uf"/>
+			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.uf}"
+				id="uf" />
 
 			<h:outputLabel>Login</h:outputLabel>
 			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.login}" />
@@ -77,6 +86,10 @@
 			<h:column>
 				<f:facet name="header">Idade</f:facet>
 				<h:outputText value="#{user.idade}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Salário</f:facet>
+				<h:outputText value="#{user.salario}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">E-mail</f:facet>

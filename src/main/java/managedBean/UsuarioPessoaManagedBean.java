@@ -1,6 +1,5 @@
 package managedBean;
 
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,6 +16,9 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.ChartSeries;
+
 import com.google.gson.Gson;
 
 import dao.DaoUsuario;
@@ -32,9 +34,27 @@ public class UsuarioPessoaManagedBean implements Serializable {
 	private List<UsuarioPessoa> list = new ArrayList<UsuarioPessoa>();
 	private DaoUsuario<UsuarioPessoa> daoGeneric = new DaoUsuario<UsuarioPessoa>();
 
+	private BarChartModel barChartModel = new BarChartModel();
+
 	@PostConstruct
 	public void init() {
 		list = daoGeneric.listar(UsuarioPessoa.class);
+
+		ChartSeries userSalario = new ChartSeries();
+
+		for (UsuarioPessoa usuarioPessoa : list) {
+
+			userSalario.set(usuarioPessoa.getNome(), usuarioPessoa.getSalario());
+
+		}
+
+		barChartModel.addSeries(userSalario);
+		barChartModel.setTitle("Gráfico de Salários");
+
+	}
+
+	public BarChartModel getBarChartModel() {
+		return barChartModel;
 	}
 
 	public UsuarioPessoa getUsuarioPessoa() {

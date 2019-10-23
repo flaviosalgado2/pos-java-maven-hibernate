@@ -24,12 +24,22 @@ public class UsuarioPessoa {
 	private String senha;
 	private int idade;
 	
+	private Double salario;
+	
 	private String sexo;
 	
 	private String cep;
 	private String logradouro;
 	private String bairro;
 	private String uf;
+	
+	public Double getSalario() {
+		return salario;
+	}
+	
+	public void setSalario(Double salario) {
+		this.salario = salario;
+	}
 
 	public String getCep() {
 		return cep;
