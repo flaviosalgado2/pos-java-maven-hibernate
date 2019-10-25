@@ -45,6 +45,28 @@
 				<f:selectItem itemValue="FEMININO" itemLabel="Feminino" />
 			</p:selectOneMenu>
 
+
+			<p:outputLabel>Cep</p:outputLabel>
+			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.cep}"
+				id="cepuser">
+				<f:ajax event="blur" execute="@this"
+					listener="#{usuarioPessoaManagedBean.pesquisaCep}"
+					render="logradouro bairro uf" />
+				<p:watermark value="Insira o Cep" for="cepuser" />
+			</p:inputText>
+
+			<p:outputLabel>Logradouro</p:outputLabel>
+			<p:inputText
+				value="#{usuarioPessoaManagedBean.usuarioPessoa.logradouro}"
+				id="logradouro" />
+			<p:outputLabel>Bairro</p:outputLabel>
+			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.bairro}"
+				id="bairro" />
+			<p:outputLabel>Uf</p:outputLabel>
+			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.uf}"
+				id="uf" />
+
+
 			<p:outputLabel>Login</p:outputLabel>
 			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.login}" />
 			<p:outputLabel>Senha</p:outputLabel>
@@ -52,6 +74,7 @@
 		</p:panelGrid>
 
 		<br />
+
 		<p:commandButton id="novo" value="Novo"
 			action="#{usuarioPessoaManagedBean.novo}" immediate="true">
 			<f:ajax execute="@this" render="@form" />
@@ -61,8 +84,10 @@
 			action="#{usuarioPessoaManagedBean.salvar}" ajax="false" />
 
 	</h:form>
+
 	<br />
 	<br />
+
 	<h:form id="formtable">
 		<p:dataTable var="user" value="#{usuarioPessoaManagedBean.list}">
 			<p:column headerText="Id">
@@ -90,18 +115,19 @@
 				<h:commandLink value="Editar" id="botaoeditar" immediate="true">
 					<f:setPropertyActionListener value="#{user}"
 						target="#{usuarioPessoaManagedBean.usuarioPessoa}" />
-					<f:ajax execute="botaoeditar" render="@form :formulario" />
+					<f:ajax execute="botaoeditar" render=":formulario" />
 					<h:graphicImage />
 				</h:commandLink>
 
 			</p:column>
+
 			<p:column>
 				<f:facet name="header">Remover</f:facet>
 				<h:commandLink immediate="true" value="Remover"
 					action="#{usuarioPessoaManagedBean.remover}" id="botaoexcluir">
 					<f:setPropertyActionListener value="#{user}"
 						target="#{usuarioPessoaManagedBean.usuarioPessoa}" />
-					<f:ajax execute="botaoexcluir" render="@form :formulario:msg" />
+					<f:ajax execute="botaoexcluir" render="@form" />
 				</h:commandLink>
 
 			</p:column>
@@ -114,10 +140,25 @@
 				</h:commandLink>
 			</p:column>
 
+			<p:column headerText="E-mails">
+				<f:facet name="header">E-mails</f:facet>
+				<p:commandLink value="E-mail" update=":formtable:dialogEmail"
+					oncomplete="PF('dialogEmail').show()">
+					<f:setPropertyActionListener value="#{user}"
+						target="#{usuarioPessoaManagedBean.usuarioPessoa}" />
+				</p:commandLink>
+			</p:column>
+
 		</p:dataTable>
+
+		<p:dialog header="E-mails" id="dialogEmail" width="490px"
+			widgetVar="dialogEmail" position="center" modal="true" resizable="false">
+
+		</p:dialog>
+
 	</h:form>
-	
+
 	<p:chart type="bar" model="#{usuarioPessoaManagedBean.barChartModel}" />
-	
+
 </h:body>
 </html>

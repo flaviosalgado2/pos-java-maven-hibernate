@@ -35,6 +35,7 @@ public class UsuarioPessoaManagedBean implements Serializable {
 	private DaoUsuario<UsuarioPessoa> daoGeneric = new DaoUsuario<UsuarioPessoa>();
 
 	private BarChartModel barChartModel = new BarChartModel();
+	//private EmailUser emailuser = new EmailUser();
 
 	@PostConstruct
 	public void init() {
