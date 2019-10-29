@@ -21,7 +21,7 @@
 
 
 	<h:form id="formulario">
-		<p:messages showSummary="false" showDetail="true" id="msg" />
+		<p:growl autoUpdate="true" showDetail="true" id="growl1" />
 		<p:panelGrid columns="12">
 			<p:outputLabel>Id</p:outputLabel>
 			<p:inputText readonly="true"
@@ -29,13 +29,12 @@
 			<p:outputLabel>Nome</p:outputLabel>
 			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.nome}"
 				required="true" requiredMessage="Informe o Nome!" a:autofocus="true" />
-			<p:outputLabel>E-mail</p:outputLabel>
-			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.email}" />
+
 			<p:outputLabel>Idade Momento</p:outputLabel>
 			<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.idade}" />
 
 			<p:outputLabel>Salário</p:outputLabel>
-			<p:inputText
+			<p:inputNumber
 				value="#{usuarioPessoaManagedBean.usuarioPessoa.salario}" />
 
 			<p:outputLabel>Sexo</p:outputLabel>
@@ -87,7 +86,15 @@
 
 	<br />
 	<br />
-
+	<h:form>
+		<p:panel header="Consultar Usuário">
+			<p:panelGrid columns="3">
+				<h:outputLabel value="Nome" />
+				<p:inputText value="#{usuarioPessoaManagedBean.campoPesquisa}"/>
+				<p:commandButton value="Buscar" actionListener="#{usuarioPessoaManagedBean.pesquisar}" update="formtable, :graficosalario"/>
+			</p:panelGrid>
+		</p:panel>
+	</h:form>
 	<h:form id="formtable">
 		<p:dataTable var="user" value="#{usuarioPessoaManagedBean.list}">
 			<p:column headerText="Id">
@@ -96,10 +103,6 @@
 
 			<p:column headerText="Nome">
 				<h:outputText value="#{user.nome}" />
-			</p:column>
-
-			<p:column headerText="Sobrenome">
-				<h:outputText value="#{user.email}" />
 			</p:column>
 
 			<p:column headerText="Idade">
@@ -127,7 +130,7 @@
 					action="#{usuarioPessoaManagedBean.remover}" id="botaoexcluir">
 					<f:setPropertyActionListener value="#{user}"
 						target="#{usuarioPessoaManagedBean.usuarioPessoa}" />
-					<f:ajax execute="botaoexcluir" render="@form" />
+					<f:ajax execute="botaoexcluir" render="@form :graficosalario" />
 				</h:commandLink>
 
 			</p:column>
@@ -152,13 +155,43 @@
 		</p:dataTable>
 
 		<p:dialog header="E-mails" id="dialogEmail" width="490px"
-			widgetVar="dialogEmail" position="center" modal="true" resizable="false">
+			widgetVar="dialogEmail" position="center" modal="true"
+			resizable="false">
+
+			<p:panelGrid columns="3">
+				<h:outputLabel value="E-mail" />
+				<p:inputText value="#{usuarioPessoaManagedBean.emailuser.email}"
+					id="emailuseradd" />
+				<p:commandButton value="Adicionar" ajax="true"
+					update="emailuseradd, dataTableEmail"
+					actionListener="#{usuarioPessoaManagedBean.addEmail}" />
+			</p:panelGrid>
+
+			<p:dataTable value="#{usuarioPessoaManagedBean.usuarioPessoa.emails}"
+				var="email" id="dataTableEmail">
+				<p:column headerText="Id">
+					<h:outputLabel value="#{email.id}" />
+				</p:column>
+
+				<p:column headerText="E-mail">
+					<h:outputText value="#{email.email}" />
+				</p:column>
+
+				<p:column headerText="Remoção">
+					<h:commandLink id="botaoremoveremail" value="Deletar"
+						actionListener="#{usuarioPessoaManagedBean.removerEmail}">
+						<f:param name="codigoemail" value="#{email.id}" />
+						<f:ajax execute="botaoremoveremail" render="dataTableEmail" />
+					</h:commandLink>
+				</p:column>
+			</p:dataTable>
 
 		</p:dialog>
 
 	</h:form>
 
-	<p:chart type="bar" model="#{usuarioPessoaManagedBean.barChartModel}" />
+	<p:chart id="graficosalario" type="bar"
+		model="#{usuarioPessoaManagedBean.barChartModel}" />
 
 </h:body>
 </html>

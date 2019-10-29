@@ -21,7 +21,9 @@ import org.primefaces.model.chart.ChartSeries;
 
 import com.google.gson.Gson;
 
+import dao.DaoEmail;
 import dao.DaoUsuario;
+import model.EmailUser;
 import model.UsuarioPessoa;
 
 @ManagedBean(name = "usuarioPessoaManagedBean")
@@ -35,11 +37,22 @@ public class UsuarioPessoaManagedBean implements Serializable {
 	private DaoUsuario<UsuarioPessoa> daoGeneric = new DaoUsuario<UsuarioPessoa>();
 
 	private BarChartModel barChartModel = new BarChartModel();
-	//private EmailUser emailuser = new EmailUser();
+	private EmailUser emailuser = new EmailUser();
+
+	private DaoEmail<EmailUser> daoEmail = new DaoEmail<EmailUser>();
+
+	private String campoPesquisa;
 
 	@PostConstruct
 	public void init() {
+		
 		list = daoGeneric.listar(UsuarioPessoa.class);
+		montarGrafico();
+
+	}
+
+	private void montarGrafico() {
+		barChartModel = new BarChartModel();
 
 		ChartSeries userSalario = new ChartSeries();
 
@@ -51,7 +64,6 @@ public class UsuarioPessoaManagedBean implements Serializable {
 
 		barChartModel.addSeries(userSalario);
 		barChartModel.setTitle("Gráfico de Salários");
-
 	}
 
 	public BarChartModel getBarChartModel() {
@@ -99,7 +111,8 @@ public class UsuarioPessoaManagedBean implements Serializable {
 
 		daoGeneric.salvar(usuarioPessoa);
 		list.add(usuarioPessoa);
-		// usuarioPessoa = new UsuarioPessoa();
+		usuarioPessoa = new UsuarioPessoa();
+		init();
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação: ", "Salvo com Sucesso!"));
 		return "";
@@ -122,6 +135,7 @@ public class UsuarioPessoaManagedBean implements Serializable {
 			daoGeneric.removerUsuario(usuarioPessoa);
 			list.remove(usuarioPessoa);
 			usuarioPessoa = new UsuarioPessoa();
+			init();
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_WARN, "Informação: ", "Excluído com Sucesso!"));
 
@@ -133,6 +147,54 @@ public class UsuarioPessoaManagedBean implements Serializable {
 			}
 		}
 		return "";
+	}
+
+	public void setEmailuser(EmailUser emailuser) {
+		this.emailuser = emailuser;
+	}
+
+	public EmailUser getEmailuser() {
+		return emailuser;
+	}
+
+	public void addEmail() {
+
+		emailuser.setUsuarioPessoa(usuarioPessoa);
+		emailuser = daoEmail.updateMerge(emailuser);
+		usuarioPessoa.getEmails().add(emailuser);
+		emailuser = new EmailUser();
+
+		// mensagem de salvo com sucesso
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Mensagem: ", "Salvo com Suceso!"));
+	}
+
+	public void removerEmail() throws Exception {
+
+		String codigoemail = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap()
+				.get("codigoemail");
+
+		EmailUser remover = new EmailUser();
+		remover.setId(Long.parseLong(codigoemail));
+		daoEmail.deletarPorId(remover);
+		usuarioPessoa.getEmails().remove(remover);
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Mensagem: ", "Removido com Sucesso!"));
+
+	}
+
+	public void setCampoPesquisa(String campoPesquisa) {
+		this.campoPesquisa = campoPesquisa;
+	}
+
+	public String getCampoPesquisa() {
+		return campoPesquisa;
+	}
+	
+	public void pesquisar() {
+		list = daoGeneric.pesquisar(campoPesquisa);
+		
+		montarGrafico();
 	}
 
 }
