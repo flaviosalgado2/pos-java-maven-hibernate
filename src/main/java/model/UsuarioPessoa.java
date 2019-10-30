@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -34,6 +35,17 @@ public class UsuarioPessoa {
 	private String logradouro;
 	private String bairro;
 	private String uf;
+	
+	@Column(columnDefinition = "text")
+	private String imagem;
+	
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
+	}
+	
+	public String getImagem() {
+		return imagem;
+	}
 	
 	public Double getSalario() {
 		return salario;
