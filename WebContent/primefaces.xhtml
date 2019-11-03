@@ -6,7 +6,9 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
-<h:head></h:head>
+<h:head>
+
+</h:head>
 <h:body>
 	<h:form>
 		<p:breadCrumb>
@@ -15,15 +17,14 @@
 			<p:menuitem value="Página Prime Faces" action="primefaces.jsf" />
 		</p:breadCrumb>
 	</h:form>
+
 	<p:panel header="Cadastro de Funcionário">
-
-
 		<h:form id="formulario">
 			<p:growl autoUpdate="true" showDetail="true" id="growl1" />
-			<h:panelGrid columns="10" cellpadding="10" cellspacing="1">
-				<p:outputLabel>Id</p:outputLabel>
+			<p:panelGrid columns="6" layout="grid">
+				<p:outputLabel value="Id" for="id" />
 				<p:inputText readonly="true"
-					value="#{usuarioPessoaManagedBean.usuarioPessoa.id}" />
+					value="#{usuarioPessoaManagedBean.usuarioPessoa.id}" id="id" />
 				<p:outputLabel>Nome</p:outputLabel>
 				<p:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.nome}"
 					required="true" requiredMessage="Informe o Nome!"
@@ -51,7 +52,7 @@
 					<f:ajax event="blur" execute="@this"
 						listener="#{usuarioPessoaManagedBean.pesquisaCep}"
 						render="logradouro bairro uf" />
-					<p:watermark value="Insira o Cep" for="cepuser" />
+					<!-- <p:watermark value="Insira o Cep" for="cepuser" /> -->
 				</p:inputText>
 
 				<p:outputLabel>Logradouro</p:outputLabel>
@@ -72,44 +73,43 @@
 				<p:outputLabel>Senha</p:outputLabel>
 				<p:password value="#{usuarioPessoaManagedBean.usuarioPessoa.senha}" />
 
-			</h:panelGrid>
+			</p:panelGrid>
 			<br />
-			<h:panelGrid columns="1">
+
+			<p:panelGrid columns="2" layout="grid">
 				<p:fileUpload mode="advanced" label="Adicionar Foto" auto="true"
 					update="imagem"
-					fileUploadListener="#{usuarioPessoaManagedBean.upload}"
-					style="width: 575px;" />
+					fileUploadListener="#{usuarioPessoaManagedBean.upload}" />
 				<h:graphicImage id="imagem"
 					value="#{usuarioPessoaManagedBean.usuarioPessoa.imagem}"
 					width="575" height="200" />
-			</h:panelGrid>
+			</p:panelGrid>
 
 			<br />
-			<center>
-				<h:panelGrid columns="2" cellpadding="20">
+
+			<p:panelGrid columns="3" layout="grid">
+				<center>
 					<p:commandButton id="novo" value="Novo"
 						action="#{usuarioPessoaManagedBean.novo}" immediate="true"
 						style="width: 200px">
 						<f:ajax execute="@this" render="@form" />
-						
+
 					</p:commandButton>
 
 					<p:commandButton id="salvar" value="Salvar"
 						action="#{usuarioPessoaManagedBean.salvar}" ajax="false"
-						style="width: 200px" icon="pi pi-save" />
+						style="width: 200px" icon="ui-icon-mail-open" />
 
-				</h:panelGrid>
-			</center>
+				</center>
+			</p:panelGrid>
+
 		</h:form>
 	</p:panel>
-
 	<br />
 	<br />
 	<h:form>
 		<p:panel header="Consultar Funcionário">
-			<p:panelGrid columns="3">
-				<i class="pi pi-envelope"></i>
-				<h:outputLabel value="Nome" />
+			<p:panelGrid columns="8" layout="grid">
 				<p:inputText value="#{usuarioPessoaManagedBean.campoPesquisa}" />
 				<p:commandButton value="Buscar"
 					actionListener="#{usuarioPessoaManagedBean.pesquisar}"
@@ -119,13 +119,26 @@
 	</h:form>
 	<h:form id="formtable">
 		<p:dataTable var="user" value="#{usuarioPessoaManagedBean.list}"
-			reflow="true">
+			reflow="true" rows="5" paginator="true" lazy="true"
+			paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PageLinks} {LastPageLink}">
 			<p:column headerText="Id">
 				<h:outputText value="#{user.id}" />
 			</p:column>
 
 			<p:column headerText="Nome">
 				<h:outputText value="#{user.nome}" />
+			</p:column>
+
+			<p:column headerText="Download">
+				<center>
+					<h:commandLink immediate="true"
+						actionListener="#{usuarioPessoaManagedBean.download}">
+						<f:param name="fileDownload" value="#{user.id}" />
+
+						<h:graphicImage url="resources/img/download.png" />
+
+					</h:commandLink>
+				</center>
 			</p:column>
 
 			<p:column headerText="Idade">
@@ -217,4 +230,5 @@
 		model="#{usuarioPessoaManagedBean.barChartModel}" />
 
 </h:body>
+
 </html>
