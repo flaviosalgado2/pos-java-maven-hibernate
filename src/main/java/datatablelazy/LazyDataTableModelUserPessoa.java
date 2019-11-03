@@ -26,7 +26,7 @@ public class LazyDataTableModelUserPessoa<T> extends LazyDataModel<UsuarioPessoa
 		list = dao.getEntityManager().createQuery(getSql()).setFirstResult(first).setMaxResults(pageSize)
 				.getResultList();
 
-		sql = "from UsuarioPessoa";
+		sql = " from UsuarioPessoa ";
 
 		setPageSize(pageSize);
 
@@ -47,6 +47,6 @@ public class LazyDataTableModelUserPessoa<T> extends LazyDataModel<UsuarioPessoa
 	}
 
 	public void pesquisar(String campoPesquisa) {
-		sql += " where like '%" + campoPesquisa + "%'";
+		sql += " where nome like '%" + campoPesquisa + "%'";
 	}
 }

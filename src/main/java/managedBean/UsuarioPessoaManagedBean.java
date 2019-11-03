@@ -58,6 +58,7 @@ public class UsuarioPessoaManagedBean implements Serializable {
 	}
 
 	private void montarGrafico() {
+		
 		barChartModel = new BarChartModel();
 
 		ChartSeries userSalario = new ChartSeries();
@@ -121,7 +122,7 @@ public class UsuarioPessoaManagedBean implements Serializable {
 		init();
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação: ", "Salvo com Sucesso!"));
-		return "";
+		return "usuario-salvo";
 	}
 
 	public String novo() {
@@ -130,7 +131,7 @@ public class UsuarioPessoaManagedBean implements Serializable {
 	}
 
 	public LazyDataTableModelUserPessoa<UsuarioPessoa> getList() {
-
+		montarGrafico();
 		return list;
 	}
 
