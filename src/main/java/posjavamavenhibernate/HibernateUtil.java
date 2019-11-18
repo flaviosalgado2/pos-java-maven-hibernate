@@ -15,7 +15,7 @@ public class HibernateUtil {
 	private static void init() {
 		try {
 			if (factory == null) {
-				factory = Persistence.createEntityManagerFactory("pos-java-maven");
+				factory = Persistence.createEntityManagerFactory("pos-java-maven-hibernate");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
