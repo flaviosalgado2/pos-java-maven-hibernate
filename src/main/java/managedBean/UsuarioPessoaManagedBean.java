@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Serializable;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Map;
@@ -33,32 +32,30 @@ import model.UsuarioPessoa;
 
 @ManagedBean(name = "usuarioPessoaManagedBean")
 @ViewScoped
-public class UsuarioPessoaManagedBean implements Serializable {
-
-	private static final long serialVersionUID = 9084995168573531022L;
+public class UsuarioPessoaManagedBean {
 
 	private UsuarioPessoa usuarioPessoa = new UsuarioPessoa();
 	private LazyDataTableModelUserPessoa<UsuarioPessoa> list = new LazyDataTableModelUserPessoa<UsuarioPessoa>();
 	private DaoUsuario<UsuarioPessoa> daoGeneric = new DaoUsuario<UsuarioPessoa>();
-
 	private BarChartModel barChartModel = new BarChartModel();
 	private EmailUser emailuser = new EmailUser();
-
 	private DaoEmail<EmailUser> daoEmail = new DaoEmail<EmailUser>();
-
 	private String campoPesquisa;
+	
+	//private BeanViewAbstract beanViewAbstract = new BeanViewAbstract();
 
 	@PostConstruct
 	public void init() {
-		
-		list.load(0, 5, null, null, null);
-		//list = daoGeneric.listar(UsuarioPessoa.class);
+
+		// list.load(0, 5, null, null, null);
+		// list = daoGeneric.listar(UsuarioPessoa.class);
+		list.list = daoGeneric.listar(UsuarioPessoa.class);
 		montarGrafico();
 
 	}
 
 	private void montarGrafico() {
-		
+
 		barChartModel = new BarChartModel();
 
 		ChartSeries userSalario = new ChartSeries();
@@ -121,8 +118,9 @@ public class UsuarioPessoaManagedBean implements Serializable {
 		usuarioPessoa = new UsuarioPessoa();
 		init();
 		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação: ", "Salvo com Sucesso!"));
-		return "usuario-salvo";
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação: ", "Salvo com Sucesso!"));		
+
+		return "primefaces.jsp";
 	}
 
 	public String novo() {
@@ -151,6 +149,8 @@ public class UsuarioPessoaManagedBean implements Serializable {
 			if (e.getCause() instanceof org.hibernate.exception.ConstraintViolationException) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
 						"Informação: ", "Existem telefones para o usuário!"));
+			} else {
+				e.printStackTrace();
 			}
 		}
 		return "";
@@ -199,7 +199,7 @@ public class UsuarioPessoaManagedBean implements Serializable {
 	}
 
 	public void pesquisar() {
-		
+
 		list.pesquisar(campoPesquisa);
 		montarGrafico();
 	}

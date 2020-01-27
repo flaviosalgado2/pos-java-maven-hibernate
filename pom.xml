@@ -16,6 +16,15 @@
 	</properties>
 
 	<dependencies>
+
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -30,7 +39,7 @@
 			<version>9.4-1200-jdbc41</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<!-- HIBERNATE -->
 		<!-- A versão do Hibernate que estava utilizando estava com bug ou com 
 			algum problema que não estava reconhecendo seu persistence unit e não estava 

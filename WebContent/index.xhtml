@@ -24,7 +24,7 @@
 				value="#{usuarioPessoaManagedBean.usuarioPessoa.id}" />
 			<h:outputLabel>Nome</h:outputLabel>
 			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.nome}" />
-			
+
 			<h:outputLabel>Idade Momento</h:outputLabel>
 			<h:inputText value="#{usuarioPessoaManagedBean.usuarioPessoa.idade}" />
 
@@ -71,7 +71,7 @@
 	</h:form>
 
 	<h:form id="formTable">
-		<h:dataTable value="#{usuarioPessoaManagedBean.list}" var="user"
+		<h:dataTable value="#{usuarioPessoaManagedBean.list.list}" var="user"
 			cellpadding="15" border="1">
 			<f:facet name="header">Lista de Usuários</f:facet>
 			<h:column>
@@ -90,18 +90,19 @@
 				<f:facet name="header">Salário</f:facet>
 				<h:outputText value="#{user.salario}" />
 			</h:column>
-			
+
 			<h:column>
 				<f:facet name="header">Editar</f:facet>
-				<h:commandLink value="Editar" id="botaoeditar">
+				<h:commandLink immediate="true" value="Editar" id="botaoeditar">
 					<f:setPropertyActionListener value="#{user}"
 						target="#{usuarioPessoaManagedBean.usuarioPessoa}" />
+					<f:ajax execute="botaoeditar" render=":formulario" />
 				</h:commandLink>
 
 			</h:column>
 			<h:column>
 				<f:facet name="header">Delete</f:facet>
-				<h:commandLink value="Deletar"
+				<h:commandLink immediate="true" value="Deletar"
 					action="#{usuarioPessoaManagedBean.remover}" id="botaoexcluir">
 
 					<f:setPropertyActionListener value="#{user}"
@@ -116,7 +117,6 @@
 				<f:facet name="header">Telefones</f:facet>
 				<h:commandLink immediate="true" value="Ver Telefone"
 					action="telefone.jsf" id="botaofone">
-
 					<f:param name="codigouser" value="#{user.id}" />
 
 				</h:commandLink>
@@ -126,5 +126,18 @@
 		</h:dataTable>
 
 	</h:form>
+
+	<script type="text/javascript" charset="UTF-8">
+		//funcao para desabilitar a tecla f5
+		window.onkeydown = function(e) {
+
+			if (e.keyCode === 116 || e.keyCode === 82) {
+				e.keyCode = 0;
+				e.returnValue = false;
+				return false;
+			}
+		}
+	</script>
+
 </h:body>
 </html>

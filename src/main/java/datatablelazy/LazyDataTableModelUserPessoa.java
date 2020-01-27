@@ -12,12 +12,12 @@ import model.UsuarioPessoa;
 
 public class LazyDataTableModelUserPessoa<T> extends LazyDataModel<UsuarioPessoa> {
 
-	private static final long serialVersionUID = -379254972118207289L;
-
+	private static final long serialVersionUID = 1L;
+	
 	private DaoUsuario<UsuarioPessoa> dao = new DaoUsuario<UsuarioPessoa>();
 	public List<UsuarioPessoa> list = new ArrayList<UsuarioPessoa>();
 
-	private String sql = "from UsuarioPessoa";
+	private String sql = " from UsuarioPessoa";
 
 	@Override
 	public List<UsuarioPessoa> load(int first, int pageSize, String sortField, SortOrder sortOrder,

@@ -28,7 +28,6 @@ public class UsuarioPessoa {
 	private int idade;
 	
 	private Double salario;
-	
 	private String sexo;
 	
 	private String cep;

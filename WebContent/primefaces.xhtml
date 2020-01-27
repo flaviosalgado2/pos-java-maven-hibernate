@@ -20,7 +20,7 @@
 
 	<p:panel header="Cadastro de Funcionário">
 		<h:form id="formulario">
-			<p:growl autoUpdate="true" showDetail="true" id="growl1" />
+			<p:growl p:autoUpdate="true" showDetail="true" id="growl1" />
 			<p:panelGrid columns="6" layout="grid">
 				<p:outputLabel value="Id" for="id" />
 				<p:inputText readonly="true"
@@ -118,9 +118,10 @@
 		</p:panel>
 	</h:form>
 	<h:form id="formtable">
-		<p:dataTable var="user" value="#{usuarioPessoaManagedBean.list}"
+		<p:dataTable var="user" value="#{usuarioPessoaManagedBean.list.list}"
 			reflow="true" rows="5" paginator="true" lazy="true"
-			paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PageLinks} {LastPageLink}">
+			paginatorPosition="bottom"
+			paginatorTemplate="{FirstPageLink} {PageLinks} {LastPageLink}">
 			<p:column headerText="Id">
 				<h:outputText value="#{user.id}" />
 			</p:column>
@@ -225,6 +226,18 @@
 		</p:dialog>
 
 	</h:form>
+
+	<script type="text/javascript">
+		//funcao para desabilitar a tecla f5
+		window.onkeydown = function(e) {
+			
+			if (e.keyCode === 116 || e.keyCode === 82) {
+				e.keyCode = 0;
+				e.returnValue = false;
+				return false;
+			}
+		}
+	</script>
 
 	<p:chart id="graficosalario" type="bar"
 		model="#{usuarioPessoaManagedBean.barChartModel}" />
